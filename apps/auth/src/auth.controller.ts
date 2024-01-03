@@ -16,6 +16,7 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     const jwt = await this.authService.login(user, response);
+    console.log('test');
     response.send({ token:jwt , email:user.email  });
   }
 
