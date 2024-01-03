@@ -16,7 +16,9 @@ export class UsersService {
     async verifyUser(email:string,passowrd:string){
         const user = await this.usersRepository.findOne({email});
         const passwordIsValid = await bycrpt.compare(passowrd,user.password);
-        if(!passwordIsValid) throw new UnauthorizedException('Credentials do not Match!');
+        if(!passwordIsValid) {
+            throw new UnauthorizedException('Credentials are not valid!');
+        }
         return user;
 
     }
