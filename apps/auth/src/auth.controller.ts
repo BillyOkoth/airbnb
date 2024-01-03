@@ -21,6 +21,7 @@ export class AuthController {
 
   @Get('users')
   async getUsers() {
+    console.log('resetted');
     return await this.authService.getUsers();
   }
 }
