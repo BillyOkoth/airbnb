@@ -4,15 +4,14 @@ import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
 import { TokenPayload } from './interfaces/token-payload.interface';
 import { UserDocument } from './users/models/users.schema';
-import { UsersService } from './users/users.service';
-import { Logger } from 'nestjs-pino';
 
 @Injectable()
 export class AuthService { 
+  
   constructor(
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
-    private readonly usersService: UsersService
+  
   ) {}
 
   async login(user: UserDocument, response: Response) {
@@ -31,12 +30,9 @@ export class AuthService {
       httpOnly: true,
       expires,
     });
-
-    return token;
+    return {access_token:token ,user}
   }
 
 
-  async getUsers() {
-   return await this.usersService.getUsers();
-  }
+  
 }

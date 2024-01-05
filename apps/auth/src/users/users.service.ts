@@ -2,10 +2,14 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import *  as bycrpt from 'bcryptjs';
 import { CreateUserDto } from './dto/user.interface';
 import { UsersRepository } from './users.repository';
+import { GetUserDto } from './dto/get-user.dto';
+import { Logger } from 'nestjs-pino';
 
 @Injectable()
 export class UsersService {
-     constructor(private readonly usersRepository:UsersRepository){}
+     constructor(
+        private readonly logger:Logger,
+        private readonly usersRepository:UsersRepository){}
     async createUser(createUserDto:CreateUserDto){
         return this.usersRepository.create({
          ...createUserDto,
@@ -23,8 +27,9 @@ export class UsersService {
 
     }
 
-    async getUsers(){
-        return this.usersRepository.find({});
-    }
+    async getUser(getUserDto: GetUserDto) {
+        this.logger.log('getUserDto',getUserDto);
+        return this.usersRepository.findOne(getUserDto)
+      }
 
 }
