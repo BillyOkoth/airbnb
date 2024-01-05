@@ -8,7 +8,6 @@ import { Logger } from 'nestjs-pino';
 @Injectable()
 export class UsersService {
      constructor(
-        private readonly logger:Logger,
         private readonly usersRepository:UsersRepository){}
     async createUser(createUserDto:CreateUserDto){
         return this.usersRepository.create({
@@ -28,7 +27,6 @@ export class UsersService {
     }
 
     async getUser(getUserDto: GetUserDto) {
-        this.logger.log('getUserDto',getUserDto);
         return this.usersRepository.findOne(getUserDto)
       }
 
