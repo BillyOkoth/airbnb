@@ -4,10 +4,13 @@ import { Response } from 'express';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { CurrentUser } from './current-user.decorator';
 import { UserDocument } from './users/models/users.schema';
+import { Logger } from 'nestjs-pino';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly logger:Logger,
+    private readonly authService: AuthService) {}
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
@@ -16,12 +19,8 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     const jwt = await this.authService.login(user, response);
-    response.send({ token:jwt , email:user.email  });
+    response.send(jwt);
   }
 
-  @Get('users')
-  async getUsers() {
-    console.log('resetted');
-    return await this.authService.getUsers();
-  }
+  
 }
