@@ -9,6 +9,7 @@ import { Logger } from 'nestjs-pino';
 @Controller('users')
 export class UsersController {
   constructor(
+    private logger:Logger,
     private readonly usersService: UsersService) {}
   @Post()
   async createUser(@Body() createUserDto: CreateUserDto) {
@@ -19,6 +20,7 @@ export class UsersController {
   @Get()
   @UseGuards(JwtAuthGuard)
   async getUser(@CurrentUser() user: UserDocument) {
+    this.logger.fatal('user',user);
     return user;
   }
 }
