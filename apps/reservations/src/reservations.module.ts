@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { DatabaseModule, LoggerModule, PAYMENTS_SERVICE } from '@app/common';
+import { DatabaseModule, LoggerModule, NOTIFICATION_SERVICE, PAYMENTS_SERVICE } from '@app/common';
 import * as Joi from 'joi';
 import { ReservationsService } from './reservations.service';
 import { ReservationsController } from './reservations.controller';
@@ -37,7 +37,7 @@ import { ReservationDocument, ReservationSchema } from './models/reservations.sc
           },
         }),
         inject: [ConfigService],
-      },
+      }
     ]),
     LoggerModule
   ],
