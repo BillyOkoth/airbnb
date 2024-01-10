@@ -24,4 +24,7 @@ export class CreateReservationDto {
   @ValidateNested()
   @Type(() => CreateChargeDto)
   charge: CreateChargeDto;
+  
+  @IsString()
+  email:string;
 }

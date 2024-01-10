@@ -3,6 +3,7 @@ import {MessagePattern ,Payload} from '@nestjs/microservices'
 import { PaymentsService } from './payments.service';
 import { CreateChargeDto } from '@app/common';
 import { Logger } from 'nestjs-pino';
+import { PaymentsCreateChargeDto } from './dto/payments-charge.dto';
 
 
 @Controller()
@@ -12,7 +13,7 @@ export class PaymentsController {
     private readonly paymentsService: PaymentsService) {}
 
  @MessagePattern('create-charge')
- async createCharge(@Payload() data: CreateChargeDto){
+ async createCharge(@Payload() data: PaymentsCreateChargeDto){
   this.logger.fatal('CREATE_CHARGE',{data});
  
 

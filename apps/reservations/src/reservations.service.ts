@@ -16,6 +16,7 @@ export class ReservationsService {
   create(createReservationDto: CreateReservationDto) {
     return this.paymentsService.send('create-charge', {
       ...createReservationDto.charge,
+      email:createReservationDto.email
     })
     .pipe(
       tap((res)=> this.logger.fatal('reservations created', {res})),
