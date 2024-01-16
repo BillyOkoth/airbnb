@@ -30,7 +30,7 @@ export class AuthService {
       httpOnly: true,
       expires,
     });
-    return {access_token:token ,user}
+    return token;
   }
 
 
