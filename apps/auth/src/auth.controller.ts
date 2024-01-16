@@ -25,7 +25,7 @@ export class AuthController {
     response.send(jwt);
   }
   
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @MessagePattern('authenticate')
   async authenticate(@Payload() data:any) {   
     this.logger.fatal('authenticating.....',{data});
